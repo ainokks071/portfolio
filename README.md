@@ -325,7 +325,7 @@ if(authType != null) {
 	
 </br>
 
-- ajax로 json데이터 전송 시 데이터 형식 오류
+- ajax로 json데이터 전송 시 데이터 형식 오류
   - Board와 Member는 ManyToOne 관계로 Board는 Member를 참조하고 있습니다.
   - Member의 memIdx를 초기화시킬 때 기본적인 json 데이터 형태를 지키지 않아서 발생한 에러입니다.
   - 아래와 같이 "member" : { "memIdx" : memIdx }로 변경하여 해결하였습니다.
