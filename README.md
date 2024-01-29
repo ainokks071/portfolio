@@ -196,7 +196,7 @@
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
 	
-	![image](https://github.com/ainokks071/portfolio/assets/140647727/0b1f1ed8-fb8c-4613-9a75-fc965162ce6f)
+![image](https://github.com/ainokks071/portfolio/assets/140647727/0b1f1ed8-fb8c-4613-9a75-fc965162ce6f)
 
 </div>
 </details>
