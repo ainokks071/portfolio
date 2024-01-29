@@ -163,7 +163,7 @@
 #### :pushpin: 간략 소개
 <ul>
   <li>회원의 기본 정보와 권한 정보를 수정할 수 있습니다.</li>
-  <li>회원 정보를 Security Context에 다시 Binding하여 갱신된 회원 정보로 로그인 상태를 유지하도록 하였습니다. </li>
+  <li>변경된 회원 정보를 Security Context에 다시 Binding하여 로그인 상태를 유지하도록 하였습니다. </li>
   <li>권한의 수정은 delete쿼리로 모든 권한을 삭제한 후, insert쿼리로 다시 등록하였습니다.</li>
 </ul>
 
@@ -173,7 +173,8 @@
 #### :pushpin: 코드 확인
 [updateForm.jsp](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/webapp/WEB-INF/views/member/updateForm.jsp#L11-L202) &rarr; 
 [MemberController](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L51-L66) &rarr; 
-[MemberServiceImpl](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L141-L223) &rarr; 
+[MemberServiceImpl](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L141-L223), 
+[UserDetailsServiceIml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L141-L223) &rarr; 
 [MemberMapper](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L25-L27) &rarr;
 [MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L34-L42)
 
@@ -192,27 +193,32 @@
 ---
 
 ### 5.5. cos.jar 라이브러리를 이용한 파일 업로드
-#### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/28357549-f3de-4958-9ea5-e153ea0d6b2e)
+#### :pushpin: 간략 소개
+<ul>
+  <li>회원가입 시 기본 이미지로 등록된 프로필 사진을 변경할 수 있습니다.</li>
+  <li>회원정보 수정과 마찬가지로, 변경된 회원 정보를 Security Context에 다시 Binding하여 로그인 상태를 유지하도록 하였습니다. </li>
+  <li>사진 업로드 직후 갱신된 사진이 배너에 보여집니다.</li>
+</ul>
 
+#### :pushpin: 전체 흐름
+![image](https://github.com/ainokks071/portfolio/assets/140647727/5a07e6af-4caa-4763-b495-5240e08d4c81)
 
 #### :pushpin: 코드 확인
-[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
-[MemberController](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L46-L59) &rarr; 
-[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L57-L130) &rarr; 
-[MemberMapper](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L23-L27) &rarr;
-[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L60-L71)
+[imageForm.jsp](https://github.com/ainokks071/portfolio/blob/285c1ff6abd25817d287f22b52badbb1bebbba10/AuthorityBoard/src/main/webapp/WEB-INF/views/member/imageForm.jsp#L10-L90) &rarr; 
+[MemberController](https://github.com/ainokks071/portfolio/blob/285c1ff6abd25817d287f22b52badbb1bebbba10/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L68-L75) &rarr; 
+[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/285c1ff6abd25817d287f22b52badbb1bebbba10/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L225-L302), 
+[UserDetailsServiceIml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L141-L223) &rarr; 
+[MemberMapper](https://github.com/ainokks071/portfolio/blob/285c1ff6abd25817d287f22b52badbb1bebbba10/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L29-L31) &rarr;
+[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/285c1ff6abd25817d287f22b52badbb1bebbba10/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L44-L50)
 
 </br>
 
 #### :pushpin: 실행화면
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
-	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/825b9d80-9476-4278-8fbd-50c585d67b8e)
-- 로그인을 한 상태에서 회원 정보 및 권한 정보 수정을 진행합니다.
-- 수정에 성공하면, 수정된 회원객체를 Security Context Holder에 새롭게 객체바인딩을 합니다.
-- 
+
+
+
 </div>
 </details>
 </br>
