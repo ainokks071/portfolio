@@ -171,19 +171,16 @@
 
 ### 5.5. Ajax/JSON을 활용한 게시판 CRUD
 
-#### :pushpin: 기능 소개
+#### :pushpin: 간략 소개
 
 <ul>
-  <li>ajax를 이용해서 페이지의 이동 없이 CRUD를 할 수 있는 게시판입니다.</li>
-  <li>회원가입과 로그인을 해야 글을 작성하고 수정하고 삭제할 수 있는 게시판입니다.</li>
+  <li>ajax를 이용하여 페이지의 이동 없이 CRUD를 할 수 있는 게시판입니다.</li>
   <li>로그인을 한 회원은 자신의 글만 수정 및 삭제가 가능하며, ADMIN 권한을 지닌 관리자는 모든 글을 삭제할 수 있습니다.</li>
-  <li>게시된 글을 선택.</li>
+  <li>게시글 작성자의 기본 정보 및 업로드한 사진을 조회할 수 있습니다. </li>
 </ul>
 
 #### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/37a8660a-d553-437a-a47f-97f12d4f0012)
-
-
+<img width="734" alt="image" src="https://github.com/ainokks071/portfolio/assets/140647727/633025b9-d000-4ef5-83ff-78fab2c33a72">
 
 #### :pushpin: 코드 확인
 [signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
