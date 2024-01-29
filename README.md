@@ -221,10 +221,12 @@
 
 
 ## 3. 트러블 슈팅
-<details><summary> 참조 무결성 위배 </summary>
+<details><summary> Member테이블보다 Authority테이블에 먼저 Insert를 했을 때 </summary>
 <div markdown="1">
 	
-> Cannot add or update a child row: a foreign key constraint
+<p>Cannot add or update a child row: a foreign key constraint</p>
+<p>Cannot add or update a child row: a foreign key constraint</p>
+<p>Cannot add or update a child row: a foreign key constraint</p>
 >
 > ㅇㅇ
 > 
