@@ -221,6 +221,34 @@
 
 
 ## 3. 트러블 슈팅
+<details><summary> ㅇㅇㅇ </summary>
+<div markdown="1">
+ㅇㅇㅇ
+</div>
+</details>
+</br>
+<details><summary> ㅇㅇㅇ </summary>
+<div markdown="1">
+ㅇㅇㅇ
+</div>
+</details>
+</br>
+<details><summary> ㅇㅇㅇ </summary>
+<div markdown="1">
+ㅇㅇㅇ
+</div>
+</details>
+</br>
+<details><summary> ㅇㅇㅇ </summary>
+<div markdown="1">
+ㅇㅇㅇ
+</div>
+</details>
+</br>
+
+
+
+
 > - MyBatis로 진행한 프로젝트이지만, 최근에 JPA를 학습하면서 ManyToOne, OneToMany의 차이점에 대해 분석했습니다.
 - Member(회원)과 Authority(권한) 엔티티를 OneToMany관계로 설계했을 때와 ManyToOne관계로 설계했을 때, CRUD 작업 시 어떠한 차이점이 있는지 면밀히 따져볼 수 있었습니다.
 - 본 프로젝트는 Board(게시판)과 Member(회원)은 ManyToOne, Member(회원)과 Authority(권한)은 OneToMany로 설계하였습니다.
