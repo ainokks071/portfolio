@@ -98,25 +98,29 @@
 ---
 
 ### 5.2. 회원가입
+#### :pushpin: 간략 소개
+<ul>
+  <li>회원가입 시 아이디 중복확인, 비밀번호 일치여부를 확인합니다.</li>
+  <li>입력 누락, 아이디 중복여부 등의 유효성검사를 front와 server에서 각각 진행하였습니다.</li>
+</ul>
+
 #### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/5c06d1d1-a900-4975-9597-4039a9d2142e)
+![image](https://github.com/ainokks071/portfolio/assets/140647727/28e2dc59-dabe-4072-b10c-bb3680b9892a)
 #### :pushpin: 코드 확인
-[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
-[MemberController](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L46-L59) &rarr; 
-[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L57-L130) &rarr; 
-[MemberMapper](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L23-L27) &rarr;
-[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L60-L71)
+[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/f57eaf1d05aa479e3a7f57e2634e53441a99b05c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signupForm.jsp#L8-L223) &rarr; 
+[MemberController](https://github.com/ainokks071/portfolio/blob/f57eaf1d05aa479e3a7f57e2634e53441a99b05c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L18-L47) &rarr; 
+[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/f57eaf1d05aa479e3a7f57e2634e53441a99b05c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L24-L137) &rarr; 
+[MemberMapper](https://github.com/ainokks071/portfolio/blob/f57eaf1d05aa479e3a7f57e2634e53441a99b05c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L9-L20) &rarr;
+[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/f57eaf1d05aa479e3a7f57e2634e53441a99b05c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L4-L22)
 
 </br>
 
 #### :pushpin: 실행화면
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
-	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/fbd0ecaa-d6c7-44af-8016-4ecad3b2c472)
-- ajax를 이용하여 ID 중복여부를 확인합니다.
-- 비밀번호 일치여부를 확인합니다.
-- User, Manager, Admin 중 권한을 선택합니다. 권한은 다중 선택이 가능합니다.
+
+![image](https://github.com/ainokks071/portfolio/assets/140647727/a98caaa5-f789-4445-acf6-179fdb481089)
+
 </div>
 </details>
 </br>
