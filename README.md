@@ -180,7 +180,8 @@
 </ul>
 
 #### :pushpin: 전체 흐름
-<img width="734" alt="image" src="https://github.com/ainokks071/portfolio/assets/140647727/633025b9-d000-4ef5-83ff-78fab2c33a72">
+![image](https://github.com/ainokks071/portfolio/assets/140647727/66119044-20aa-4464-a5e5-262be46c04d1)
+
 
 #### :pushpin: 코드 확인
 [signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
