@@ -1,6 +1,7 @@
 # :white_check_mark: 김경수의 포트폴리오
 
 ## :pushpin: Intro
+
 > <b>"모든 것은 기본에서 시작한다."</b>라는 말을 좋아합니다.
 > 
 > 축구선수가 매일 기본기 훈련인 달리기, 패스, 슈팅연습을 하듯이
@@ -8,6 +9,7 @@
 > 개발자 역시 끊임없는 사고, 문제해결을 위한 고민, 팀원들과의 협업이 기본기일 것이라 생각합니다.
 > 
 > 하루하루 지치지 않고 꾸준한 기본기 훈련을 토대로 훗날 멋진 개발자가 되고 싶습니다.
+> 
 
 </br>
 
@@ -26,13 +28,12 @@
 >
 >기술 스택 :
 >
->Java 11 / Spring Framework / Maven / MyBatis / MySQL / Spring Security / JSP
+>Java 11 / Spring Framework 5.3 / Spring Security 5.3 / MyBatis 3.5 / MySQL 8.0 / JSP / Maven
 >
 >html / css / bootstrap / JavaScript / JQuery / ajax
 >
 
 </br>
-
 
 # :white_check_mark: 회원 전용 게시판
 
