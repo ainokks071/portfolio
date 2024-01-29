@@ -1,10 +1,10 @@
 # :white_check_mark: 김경수의 포트폴리오
-> ㅇㅇㅇ
 
 </br>
 
 ## :pushpin: Intro
-(여기에 자기소개)
+>
+> 
 
 </br>
 
@@ -39,30 +39,15 @@
 
 </br>
 
-## 1. 제작 기간 & 참여 인원
-
-> 2019년 2월 18일 ~ 4월 5일
-> 개인 프로젝트
-
-</br>
-
-## 2. 사용 기술
-
-> Java 8 / Spring Boot 2.3 / Gradle / Spring Data JPA / QueryDSL
->
-> H2 / MySQL 5.7 / Spring Security / Jsoup / Vue.js 3.0 / Element UI
-
-</br>
-
-## 3. ERD 및 Entity
+## 1. ERD 및 Entity
 
 ![image](https://github.com/ainokks071/portfolio/assets/140647727/2ffaf32e-58ca-49d2-91cd-36bd8e94780c)
 
 </br>
 
-## 5. 주요 기능
+## 2. 주요 기능
 
-### 5.1. Ajax/JSON을 활용한 게시판 CRUD
+### 2.1. Ajax/JSON을 활용한 게시판 CRUD
 
 #### :pushpin: 간략 소개
 
@@ -97,7 +82,7 @@
 
 ---
 
-### 5.2. 회원가입
+### 2.2. 회원가입
 #### :pushpin: 간략 소개
 <ul>
   <li>회원가입 시 아이디 중복확인, 비밀번호 일치여부를 확인합니다.</li>
@@ -128,7 +113,7 @@
 
 ---
 
-### 5.3. Spring Security를 활용한 로그인/로그아웃
+### 2.3. Spring Security를 활용한 로그인/로그아웃
 #### :pushpin: 간략 소개
 <ul>
   <li>로그인 시 입력 누락, 회원 일치여부 등 유효성검사를 front와 server에서 각각 진행하였습니다.</li>
@@ -159,7 +144,7 @@
 
 ---
 
-### 5.4. 회원정보 및 권한 수정
+### 2.4. 회원정보 및 권한 수정
 #### :pushpin: 간략 소개
 <ul>
   <li>회원의 기본 정보와 권한 정보를 수정할 수 있습니다.</li>
@@ -192,7 +177,7 @@
 
 ---
 
-### 5.5. cos.jar 라이브러리를 이용한 파일 업로드
+### 2.5. cos.jar 라이브러리를 이용한 파일 업로드
 #### :pushpin: 간략 소개
 <ul>
   <li>회원가입 시 기본 이미지로 등록된 프로필 사진을 변경할 수 있습니다.</li>
@@ -224,7 +209,7 @@
 </br>
 
 
-## 6. 트러블 슈팅
+## 3. 트러블 슈팅
 > - MyBatis로 진행한 프로젝트이지만, 최근에 JPA를 학습하면서 ManyToOne, OneToMany의 차이점에 대해 분석했습니다.
 - Member(회원)과 Authority(권한) 엔티티를 OneToMany관계로 설계했을 때와 ManyToOne관계로 설계했을 때, CRUD 작업 시 어떠한 차이점이 있는지 면밀히 따져볼 수 있었습니다.
 - 본 프로젝트는 Board(게시판)과 Member(회원)은 ManyToOne, Member(회원)과 Authority(권한)은 OneToMany로 설계하였습니다.
@@ -311,7 +296,7 @@ null체크 하지 않고, insert
 
 
 
-## 7. 회고 및 향후 계획
+## 4. 회고 및 향후 계획
 
 > ㅇㅇㅇ
 >
