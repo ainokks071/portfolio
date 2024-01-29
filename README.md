@@ -129,25 +129,30 @@
 ---
 
 ### 5.3. Spring Security를 활용한 로그인/로그아웃
+#### :pushpin: 간략 소개
+<ul>
+  <li>로그인 시 입력 누락, 회원 일치여부 등 유효성검사를 front와 server에서 각각 진행하였습니다.</li>
+  <li>회원의 사진은 기본 프로필 사진으로 보여집니다.</li>
+  <li>Member와 Authority를 Join으로 조회하여 배너에 회원의 이름과 권한 정보가 표시됩니다.</li>
+</ul>
+
 #### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/50b2c280-3574-4d4d-9f8d-24b7dfda431f)
+![image](https://github.com/ainokks071/portfolio/assets/140647727/d682c36e-179d-4eeb-a147-3be37fa5695f)
+
 #### :pushpin: 코드 확인
-[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
-[MemberController](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L46-L59) &rarr; 
-[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L57-L130) &rarr; 
-[MemberMapper](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L23-L27) &rarr;
-[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L60-L71)
+[loginForm.jsp](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/webapp/WEB-INF/views/member/loginForm.jsp#L8-L66) &rarr; 
+[UserDetailsServiceIml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/UserDetailsServiceImpl.java#L15-L51) &rarr; 
+[MemberMapper](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L22-L23) &rarr;
+[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L29-L32)
 
 </br>
 
 #### :pushpin: 실행화면
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
-	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/825b9d80-9476-4278-8fbd-50c585d67b8e)
-- ajax를 이용하여 ID 중복여부를 확인합니다.
-- 비밀번호 일치여부를 확인합니다.
-- User, Manager, Admin 중 권한을 선택합니다. 권한은 다중 선택이 가능합니다.
+
+![image](https://github.com/ainokks071/portfolio/assets/140647727/49846268-91c8-4c5a-b95e-f5316bc57409)
+
 </div>
 </details>
 </br>
@@ -155,26 +160,31 @@
 ---
 
 ### 5.4. 회원정보 및 권한 수정
-#### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/1e6becff-d790-4f18-8c0a-3d28809180e6)
+#### :pushpin: 간략 소개
+<ul>
+  <li>회원의 기본 정보와 권한 정보를 수정할 수 있습니다.</li>
+  <li>회원 정보를 Security Context에 다시 Binding하여 갱신된 회원 정보로 로그인 상태를 유지하도록 하였습니다. </li>
+  <li>권한의 수정은 delete쿼리로 모든 권한을 삭제한 후, insert쿼리로 다시 등록하였습니다.</li>
+</ul>
 
+#### :pushpin: 전체 흐름
+![image](https://github.com/ainokks071/portfolio/assets/140647727/4c5f529d-60dd-4df0-9588-5bbfc4cbc1a0)
 
 #### :pushpin: 코드 확인
-[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
-[MemberController](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L46-L59) &rarr; 
-[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L57-L130) &rarr; 
-[MemberMapper](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L23-L27) &rarr;
-[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L60-L71)
+[updateForm.jsp](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/webapp/WEB-INF/views/member/updateForm.jsp#L11-L202) &rarr; 
+[MemberController](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L51-L66) &rarr; 
+[MemberServiceImpl](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L141-L223) &rarr; 
+[MemberMapper](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L25-L27) &rarr;
+[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/b2ab2a0df84f62a1f993e5ac94661ac9308f3630/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L34-L42)
+
 </br>
 
 #### :pushpin: 실행화면
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
-	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/825b9d80-9476-4278-8fbd-50c585d67b8e)
-- 로그인을 한 상태에서 회원 정보 및 권한 정보 수정을 진행합니다.
-- 수정에 성공하면, 수정된 회원객체를 Security Context Holder에 새롭게 객체바인딩을 합니다.
-- 
+
+![image](https://github.com/ainokks071/portfolio/assets/140647727/7b49d6b9-e613-43ea-96ee-7abb39c25cd7)
+
 </div>
 </details>
 </br>
