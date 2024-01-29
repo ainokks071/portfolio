@@ -222,6 +222,23 @@
 
 ## 2. 트러블 슈팅
 
+<details><summary><b>  </b></summary>
+<div markdown="1">
+	
+</br>
+
+- ㅇㅇ
+  - ㅇㅇ 
+ 
+```java
+
+```
+</div>
+</details>
+
+</br>
+
+
 <details><summary><b>Member테이블보다 Authority테이블에 먼저 Insert를 했을 때</b></summary>
 <div markdown="1">
 	
@@ -285,7 +302,35 @@ if(authType != null) {
 
 </br>
 
+<details><summary><b>mapper.xml에서 resultType과 resultMap을 혼용하였을 때</b></summary>
+<div markdown="1">
+	
+</br>
 
+- 브라우저에서 parsing error 발생
+  - ajax로 특정 Idx에 해당하는 게시물 조회 시, 브라우저에서 출력되지 않았습니다.
+  - SQL쿼리 select에 문제가 없어 보여서 처음에는 프론트단에서 ajax문제일 것이라 생각했습니다.
+  - 하지만, MyBatis mapper.xml의 resultType의 문제였습니다.
+  - resultType은 조인쿼리를 사용하지 않을 때, resultMap은 조인쿼리를 사용할 때 쓰는 것이라 알고있었습니다.
+  - 그것은 잘못된 지식이었고, BoardDTO는 이미 resultMap으로 선언되어 있기 때문에 조인쿼리와 관계없이 resultType이 아니라 resultMap으로 변경해야 한다는 것을 알게 되었습니다.
+ 
+```html
+<!-- 이미 boardMap으로 선언되어있는 BoardDTO -->
+<resultMap type="kr.bit.entity.BoardDTO" id="boardMap">
+
+<!-- 변경 전 -->
+<select id="boardContent" parameterType="Integer" resultType="kr.bit.entity.BoardDTO">
+	SELECT * FROM board WHERE brd_Idx = #{brdIdx}
+</select>
+<!-- 변경 후 -->
+<select id="boardContent" parameterType="Integer" resultMap="boardMap">
+	SELECT * FROM board WHERE brd_Idx = #{brdIdx}
+</select>
+```
+</div>
+</details>
+
+</br>
 
 
 > - MyBatis로 진행한 프로젝트이지만, 최근에 JPA를 학습하면서 ManyToOne, OneToMany의 차이점에 대해 분석했습니다.
@@ -306,17 +351,6 @@ Failed to convert value of type 'java.lang.String' to required type 'int'; neste
 참조하는 테이블에 데이터를 먼저 추가한 후, 참조받는 테이블에 데이터를 추가하니 오류해결.
 (외래키로 연결한 값을 동일하게 줘야함)  -->
 
-> 5. //		### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'auth_Type' cannot be null
-null체크 하지 않고, insert
-> ㅇㅇㅇ
->6. //		ERROR 1452: 1452: Cannot add or update a child row: a foreign key constraint fails
-//	 	부모 - 자식 테이블에 데이터가 있는데, 부모 테이블에 삭제, 추가 하려고 하면 에러난다. 
-> ㅇㅇㅇ<!--   (1452): Cannot add or update a child row: a foreign key constraint fails 
-참조테이블에 없는 값을 추가해서 발생한 오류
-참조 무결성에 따라서 부모키에 해당하는 값만 넣을 수 있음.
- 
-참조하는 테이블에 데이터를 먼저 추가한 후, 참조받는 테이블에 데이터를 추가하니 오류해결.
-(외래키로 연결한 값을 동일하게 줘야함)  -->
 > 7. //			트러블슈팅 : NullPointerException!! ->  MemberDTO는 resultMap으로 설정되어 있어서, resultTye = resultMap! 따라서, null 반환!
 > 	<select id="getMember" parameterType="Integer" resultMap="memberMap">
 		SELECT * FROM member WHERE mem_Idx = #{mem_Idx}
@@ -349,9 +383,7 @@ null체크 하지 않고, insert
 
 >  <!-- 트러블 슈팅 : parsing error 아니 도대체 왜 조인을 해야만 success가 될까???? BoadrDTO가 resultMape으로 설정되어있어서?
 				값이 넘어오지 않는다. 처음엔 프론트단에서 ajax문제일거라 생각 -> DB문제(sql문제) !!!-->
-<!--<select id="boardContent" parameterType="Integer" resultType="kr.bit.entity.BoardDTO">
-		SELECT * FROM board WHERE brd_Idx = #{brdIdx}
-  	</select>  -->
+<!-- -->
 >
 
 
