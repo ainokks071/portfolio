@@ -14,9 +14,13 @@
 </br>
 
 ## :pushpin: Contact
-- 이메일 : ainokks071@gamil.com
-- 블로그 : https://velog.io/@ainokks071/posts
-- 깃헙 : https://github.com/ainokks071
+
+> <b>이메일</b> : ainokks071@gamil.com
+> 
+> <b>블로그</b> : https://velog.io/@ainokks071/posts
+> 
+> <b>깃헙</b> : https://github.com/ainokks071
+> 
  
 </br>
 
