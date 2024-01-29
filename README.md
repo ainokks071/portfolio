@@ -197,7 +197,7 @@
 <ul>
   <li>회원가입 시 기본 이미지로 등록된 프로필 사진을 변경할 수 있습니다.</li>
   <li>회원정보 수정과 마찬가지로, 변경된 회원 정보를 Security Context에 다시 Binding하여 로그인 상태를 유지하도록 하였습니다. </li>
-  <li>사진 업로드 직후 갱신된 사진이 배너에 보여집니다.</li>
+  <li>사진 업로드 직후 갱신된 사진이 배너에 보여지고, 게시판에서도 작성자 이름을 클릭하면 사진이 보여집니다.</li>
 </ul>
 
 #### :pushpin: 전체 흐름
@@ -217,7 +217,7 @@
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
 
-
+![image](https://github.com/ainokks071/portfolio/assets/140647727/0ab8073e-0b28-4920-bafb-5fe22cc1e4fa)
 
 </div>
 </details>
