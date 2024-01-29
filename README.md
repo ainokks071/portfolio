@@ -222,8 +222,10 @@
 
 ## 2. 트러블 슈팅
 
-<details><summary> Member테이블보다 Authority테이블에 먼저 Insert를 했을 때 </summary>
+<details><summary><b>Member테이블보다 Authority테이블에 먼저 Insert를 했을 때</b></summary>
 <div markdown="1">
+	
+</br>
 
 - (1452): Cannot add or update a child row: a foreign key constraint
   - 회원가입 시 Member테이블과 Authority테이블에 데이터를 넣는 상황에서 발생한 에러입니다.	
