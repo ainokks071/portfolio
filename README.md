@@ -62,7 +62,42 @@
 
 ## 5. 주요 기능
 
-### 5.1. 회원가입
+### 5.1. Ajax/JSON을 활용한 게시판 CRUD
+
+#### :pushpin: 간략 소개
+
+<ul>
+  <li>ajax를 이용하여 페이지의 이동 없이 CRUD를 할 수 있는 게시판입니다.</li>
+  <li>게시물은 Board, Member를 Join하여 조회하였고, 회원은 Member와 Authority를 Join하여 조회하였습니다.</li>
+  <li>로그인을 한 회원은 자신의 글만 수정 및 삭제가 가능하며, ADMIN 권한을 지닌 관리자는 모든 글을 삭제할 수 있습니다.</li>
+  <li>게시글 작성자의 기본 정보 및 업로드한 사진을 조회할 수 있습니다. </li>
+</ul>
+
+#### :pushpin: 전체 흐름
+![image](https://github.com/ainokks071/portfolio/assets/140647727/66119044-20aa-4464-a5e5-262be46c04d1)
+
+#### :pushpin: 코드 확인
+[board.jsp](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/webapp/WEB-INF/views/board/board.jsp#L11-L404) &rarr; 
+[BoardController](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/controller/BoardController.java#L22-L65) &rarr; 
+[BoardServiceIml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/service/BoardServiceImpl.java#L11-L47) &rarr; 
+[BoardMapper](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.java#L10-L30) &rarr;
+[BoardMapper.xml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.xml#L6-L62)
+
+</br>
+
+#### :pushpin: 실행화면
+<details><summary><b>상세 보기</b></summary>
+<div markdown="1">
+	
+![image](https://github.com/ainokks071/portfolio/assets/140647727/8a3eef88-fe51-4b25-8833-7a6daed05259)
+
+</div>
+</details>
+</br>
+
+---
+
+### 5.2. 회원가입
 #### :pushpin: 전체 흐름
 ![image](https://github.com/ainokks071/portfolio/assets/140647727/5c06d1d1-a900-4975-9597-4039a9d2142e)
 #### :pushpin: 코드 확인
@@ -88,7 +123,7 @@
 
 ---
 
-### 5.2. Spring Security를 활용한 로그인/로그아웃
+### 5.3. Spring Security를 활용한 로그인/로그아웃
 #### :pushpin: 전체 흐름
 ![image](https://github.com/ainokks071/portfolio/assets/140647727/50b2c280-3574-4d4d-9f8d-24b7dfda431f)
 #### :pushpin: 코드 확인
@@ -114,7 +149,7 @@
 
 ---
 
-### 5.3. 회원정보 및 권한 수정
+### 5.4. 회원정보 및 권한 수정
 #### :pushpin: 전체 흐름
 ![image](https://github.com/ainokks071/portfolio/assets/140647727/1e6becff-d790-4f18-8c0a-3d28809180e6)
 
@@ -141,7 +176,7 @@
 
 ---
 
-### 5.4. cos.jar 라이브러리를 이용한 파일 업로드
+### 5.5. cos.jar 라이브러리를 이용한 파일 업로드
 #### :pushpin: 전체 흐름
 ![image](https://github.com/ainokks071/portfolio/assets/140647727/28357549-f3de-4958-9ea5-e153ea0d6b2e)
 
@@ -166,42 +201,6 @@
 </div>
 </details>
 </br>
-
----
-
-### 5.5. Ajax/JSON을 활용한 게시판 CRUD
-
-#### :pushpin: 간략 소개
-
-<ul>
-  <li>ajax를 이용하여 페이지의 이동 없이 CRUD를 할 수 있는 게시판입니다.</li>
-  <li>로그인을 한 회원은 자신의 글만 수정 및 삭제가 가능하며, ADMIN 권한을 지닌 관리자는 모든 글을 삭제할 수 있습니다.</li>
-  <li>게시글 작성자의 기본 정보 및 업로드한 사진을 조회할 수 있습니다. </li>
-</ul>
-
-#### :pushpin: 전체 흐름
-![image](https://github.com/ainokks071/portfolio/assets/140647727/66119044-20aa-4464-a5e5-262be46c04d1)
-
-
-#### :pushpin: 코드 확인
-[board.jsp](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/webapp/WEB-INF/views/board/board.jsp#L11-L404) &rarr; 
-[BoardController](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/controller/BoardController.java#L22-L65) &rarr; 
-[BoardServiceIml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/service/BoardServiceImpl.java#L11-L47) &rarr; 
-[BoardMapper](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.java#L10-L30) &rarr;
-[BoardMapper.xml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.xml#L6-L62)
-
-</br>
-
-#### :pushpin: 실행화면
-<details><summary><b>상세 보기</b></summary>
-<div markdown="1">
-	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/7c4c7759-2289-4be4-bbfb-d4a2fc72d2d8)
-
-</div>
-</details>
-</br>
-
 
 
 ## 6. 트러블 슈팅
