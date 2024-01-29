@@ -220,7 +220,7 @@
 </br>
 
 
-## 2. 트러블 슈팅
+## 3. 트러블 슈팅
 
 <details><summary><b>  </b></summary>
 <div markdown="1">
