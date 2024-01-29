@@ -222,23 +222,6 @@
 
 ## 3. 트러블 슈팅
 
-<details><summary><b>  </b></summary>
-<div markdown="1">
-	
-</br>
-
-- ㅇㅇ
-  - ㅇㅇ 
- 
-```java
-
-```
-</div>
-</details>
-
-</br>
-
-
 <details><summary><b>Member테이블보다 Authority테이블에 먼저 Insert를 했을 때</b></summary>
 <div markdown="1">
 	
