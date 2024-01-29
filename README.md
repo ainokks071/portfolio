@@ -220,24 +220,22 @@
 </br>
 
 
-## 3. 트러블 슈팅
+## 2. 트러블 슈팅
+
 <details><summary> Member테이블보다 Authority테이블에 먼저 Insert를 했을 때 </summary>
 <div markdown="1">
-	
-<p>Cannot add or update a child row: a foreign key constraint</p>
-<p>Cannot add or update a child row: a foreign key constraint</p>
-<p>Cannot add or update a child row: a foreign key constraint</p>
->
-> ㅇㅇ
-> 
-> ㅇㅇ
-> 
-> ㅇㅇ
 
-
-> 
-
-
+- (1452): Cannot add or update a child row: a foreign key constraint
+  - 회원가입 시 Member테이블과 Authority테이블에 데이터를 넣는 상황에서 발생한 에러입니다.	
+  - 자식테이블인 Authority테이블에 먼저 데이터를 넣으려고 했기 때문에 발생하였고, 참조 무결성을 지키지 않았음을 알게 되었습니다.
+  - 아래와 같이 회원 insert 후, 권한 insert로 순서를 변경하여 해결하였습니다.
+ 
+```java
+//회원 insert
+memberMapper.memberInsert(member);
+//권한 insert
+memberMapper.authInsert(map);
+```
 
 </div>
 </details>
