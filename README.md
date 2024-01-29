@@ -52,7 +52,7 @@
 
 ## 1. ERD 및 Entity
 
-![image](https://github.com/ainokks071/portfolio/assets/140647727/2ffaf32e-58ca-49d2-91cd-36bd8e94780c)
+![image](https://github.com/ainokks071/portfolio/assets/140647727/29d431bc-6fb8-43cd-9fc2-f5f999678db5)
 
 </br>
 
