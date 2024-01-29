@@ -284,7 +284,9 @@ null체크 하지 않고, insert
 <!--<select id="boardContent" parameterType="Integer" resultType="kr.bit.entity.BoardDTO">
 		SELECT * FROM board WHERE brd_Idx = #{brdIdx}
   	</select>  -->
-
+>
+>
+>
 </br>
 
 
