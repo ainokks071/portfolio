@@ -307,12 +307,13 @@ if(authType != null) {
 	
 </br>
 
-- 브라우저에서 parsing error 발생
-  - ajax로 특정 Idx에 해당하는 게시물 조회 시, 브라우저에서 출력되지 않았습니다.
+- 브라우저에서 parsing error와 서버에서 NullPointerException 발생
+  - ajax로 특정 Idx에 해당하는 게시물 조회 시, 브라우저에서 데이터가 출력되지 않고, 서버에서는 NullPointerException가 발생했습니다.
   - SQL쿼리 select에 문제가 없어 보여서 처음에는 프론트단에서 ajax문제일 것이라 생각했습니다.
   - 하지만, MyBatis mapper.xml의 resultType의 문제였습니다.
   - resultType은 조인쿼리를 사용하지 않을 때, resultMap은 조인쿼리를 사용할 때 쓰는 것이라 알고있었습니다.
   - 그것은 잘못된 지식이었고, BoardDTO는 이미 resultMap으로 선언되어 있기 때문에 조인쿼리와 관계없이 resultType이 아니라 resultMap으로 변경해야 한다는 것을 알게 되었습니다.
+  - 아래와 같이 변경하여 해결하였습니다.
  
 ```html
 <!-- 이미 boardMap으로 선언되어있는 BoardDTO -->
@@ -332,39 +333,18 @@ if(authType != null) {
 
 </br>
 
+<details><summary><b>json데이터 전송 실패</b></summary>
+<div markdown="1">
+	
+</br>
 
-> - MyBatis로 진행한 프로젝트이지만, 최근에 JPA를 학습하면서 ManyToOne, OneToMany의 차이점에 대해 분석했습니다.
-- Member(회원)과 Authority(권한) 엔티티를 OneToMany관계로 설계했을 때와 ManyToOne관계로 설계했을 때, CRUD 작업 시 어떠한 차이점이 있는지 면밀히 따져볼 수 있었습니다.
-- 본 프로젝트는 Board(게시판)과 Member(회원)은 ManyToOne, Member(회원)과 Authority(권한)은 OneToMany로 설계하였습니다.
-- 
->3. 	  const memGender = $("input[name=memGender]:radio:checked").length < 1
-	  
-	  const auth1 = $('input:checkbox[id="auth1"]').is(":checked");
-	  const auth2 = $('input:checkbox[id="auth2"]').is(":checked");
-	  const auth3 = $('input:checkbox[id="auth3"]').is(":checked");
-   
-Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string:
-> 4. <!--  회원, 권한 수정 (1452): Cannot add or update a child row: a foreign key constraint fails 
-참조테이블에 없는 값을 추가해서 발생한 오류
-참조 무결성에 따라서 부모키에 해당하는 값만 넣을 수 있음.
- 
-참조하는 테이블에 데이터를 먼저 추가한 후, 참조받는 테이블에 데이터를 추가하니 오류해결.
-(외래키로 연결한 값을 동일하게 줘야함)  -->
-
-> 7. //			트러블슈팅 : NullPointerException!! ->  MemberDTO는 resultMap으로 설정되어 있어서, resultTye = resultMap! 따라서, null 반환!
-> 	<select id="getMember" parameterType="Integer" resultMap="memberMap">
-		SELECT * FROM member WHERE mem_Idx = #{mem_Idx}
-	</select>
-> 8.		} catch (IOException e) {
-//			파일 크기 10mb 이상일 경우 ?
-//			java.io.IOException: Posted content length of 11787364 exceeds limit of 10485760
-			e.printStackTrace();
-			rattr.addFlashAttribute("msg3", "파일 업로드 오류");
-			rattr.addFlashAttribute("msg4", "파일의 크기는 10MB를 초과할 수 없습니다.");
-//			톰캣의 server.xml에 추가 -> maxswallowSize -1 -> 한계치까지는 업로드 해본다.
-//			<Connector connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443" maxSwallowSize="-1"/>
-
-> 9. 		/* 	트러블 슈팅 : ajax에서 데이터 보낼 때, 객체 변수의 필드접근! xml에서 member.memIdx */
+- ajax로 json데이터 전송 시 데이터 형식 오류
+  - Board와 Member는 ManyToOne 관계로 Board는 Member를 참조하고 있습니다.
+  - Member의 memIdx를 초기화시킬 때 기본적인 json 데이터 형태를 지키지 않아서 발생한 에러입니다.
+  - 아래와 같이 "member" : { "memIdx" : memIdx }로 변경하여 해결하였습니다.
+  - 또한, mapper.xml에서 Member의 memIdx 접근 시, #{member.memIdx}형태로 접근하는 것도 알게 되었습니다.
+ 
+```javascript
 		$.ajax({
 			url : "board/new",
 			type : "post",
@@ -376,22 +356,56 @@ Failed to convert value of type 'java.lang.String' to required type 'int'; neste
 				     }
 				   }),
 			contentType : 'application/json;charset=utf-8',
-> //	@RequestBody : JSON 형태로 넘어오는 데이터 받는다 -> 생략 불가능 !
-//	<!-- 트러블 슈팅1. : ajax에서 데이터 보낼 때, 객체 변수(Member member)의 필드접근! #{member.memIdx}!!-->
-//	<!-- 트러블 슈팅2. : ajax에서 데이터 보낼 때, ajax구조,형태 ! {} {} {}.. 
-//	<!-- 트러블 슈팅3. : @RequestBody만 적으면 안됨! void이더라도 @ResponseBody !!!!!!! -> 해결!! -> Not Found 404 뜬다.
-
->  <!-- 트러블 슈팅 : parsing error 아니 도대체 왜 조인을 해야만 success가 될까???? BoadrDTO가 resultMape으로 설정되어있어서?
-				값이 넘어오지 않는다. 처음엔 프론트단에서 ajax문제일거라 생각 -> DB문제(sql문제) !!!-->
-<!-- -->
->
-
-
+```
+</div>
+</details>
 
 </br>
 
+<details><summary><b>파일 업로드 시 서버 중단</b></summary>
+<div markdown="1">
+	
+</br>
 
+- 업로드하는 파일의 용량이 maxSize인 10MB보다 클 때 서버 중단
+  - 톰캣의 server.xml에 "maxswallowSize -1"을 추가하여 해결하였습니다.
+  - 서버 중단 없이 한계치까지는 업로드 해보고 아래와 같이 예외처리를 통해 modal창을 표시하였습니다.
+ 
+```html
+<Connector connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443" maxSwallowSize="-1"/>
+```
+```java
+} catch (IOException e) {
+// 파일 크기 10mb 이상일 경우
+java.io.IOException: Posted content length of 11787364 exceeds limit of 10485760
+e.printStackTrace();
+rattr.addFlashAttribute("msg3", "파일 업로드 오류");
+rattr.addFlashAttribute("msg4", "파일의 크기는 10MB를 초과할 수 없습니다.");
+```
+</div>
+</details>
 
+</br>
+
+<details><summary><b>@ResponseBody 생략 시, 브라우저에서 Not Found 404 발생</b></summary>
+<div markdown="1">
+	
+</br>
+
+- REST server개발 시, boardInsert()의 반환타입이 void여도 반드시 @ResponseBody를 붙여야 한다는 것을 알게 되었습니다.
+ 
+```java
+//게시글 등록
+@ResponseBody
+@PostMapping("/new")
+public void boardInsert(@RequestBody BoardDTO board) {
+	boardService.boardInsert(board);
+}
+```
+</div>
+</details>
+
+</br>
 
 ## 4. 회고 및 향후 계획
 
