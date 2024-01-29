@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.bit.mapper.MemberMapper">
+<!-- 1.회원 가입 -->
+	<!-- 아이디 중복 확인 : 중복된 아이디 존재하면 해당 ID반환-->
+	<select id="idDuplicated" parameterType="String" resultType="String">
+		SELECT mem_ID FROM member WHERE mem_ID = #{memID}
+	</select>
+	
+	<!-- 회원 insert -->
+	<insert id="memberInsert" parameterType="kr.bit.entity.MemberDTO">
+		INSERT INTO member(mem_ID, mem_Password, mem_Name, mem_Age, mem_Gender, mem_Email, mem_Profile)
+		VALUES(#{memID}, #{memPassword}, #{memName}, #{memAge}, #{memGender}, #{memEmail}, #{memProfile})
+	</insert>	
+	
+	<!-- 권한 insert JPA처럼 엔티티 설계하여 변경해보기. -->
+	<!--<insert id="authInsert" parameterType="kr.bit.entity.AuthDTO">
+		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{authNum}, #{authType}, #{memIdx}) 
+	</insert> -->
+	<insert id="authInsert" parameterType="Map">
+		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{auth.authNum}, #{auth.authType}, #{memIdx}) 
+	</insert>
+	
+	<select id="getMemberIdx" parameterType="String" resultType="Integer">
+		SELECT mem_Idx FROM member WHERE mem_ID = #{memID}
+	</select>
+	
+	
+<!-- 2. 시큐리티 로그인 : 회원 + 권한 join  -->
+	<select id="memberLogin" parameterType="String" resultMap="memberMap">
+		SELECT * FROM member M LEFT JOIN authority A ON M.mem_Idx = A.mem_Idx WHERE M.mem_ID = #{username}
+	</select>
+
+<!-- 3. 회원 정보, 권한 정보 수정 -->
+	<update id="memberUpdate" parameterType="kr.bit.entity.MemberDTO">
+		UPDATE member SET mem_Password = #{memPassword}, mem_Name = #{memName}, mem_Age = #{memAge},
+		mem_Gender = #{memGender}, mem_Email = #{memEmail} where mem_Idx = #{memIdx}
+	</update>
+	
+	<delete id="authDelete" parameterType="Integer">
+		DELETE FROM authority WHERE mem_Idx = #{memIdx} 
+	</delete>
+
+<!-- 4. 파일 업로드 --> 
+	<update id="imageUpdate" parameterType="kr.bit.entity.MemberDTO" >
+  		UPDATE member SET mem_Profile = #{memProfile} where mem_Idx = #{memIdx}
+	</update> 
+	<select id="getMember" parameterType="Integer" resultMap="memberMap">
+		SELECT * FROM member WHERE mem_Idx = #{mem_Idx}
+	</select>
+	
+	
+	
+	
+	
+	
+  
+  <!-- 회원 + 권한 정보 JOIN  -->
+  <!-- 예를 들어, 조회된 결과의 행이 2개이더라도, memberMap의 1대 다 특성상, 결과로 묶이는 객체는 list가 아니다! -->
+	<select id="getMemberByIdx" parameterType="Integer" resultMap="memberMap">
+  		SELECT * FROM member M INNER JOIN authority A ON M.mem_Idx = A.mem_Idx WHERE M.mem_Idx = #{mem_Idx}
+ 	</select>
+<!--모두 단방향으로만 연결되어 있어도 FK로 조회 가능하다!
+	<select id="getMemberByIdx" parameterType="Integer" resultMap="boardMap">
+  	</select> -->  
+  
+  <!-- 단방향 매핑 : [게시글 -> 회원 -> 권한] JPA라면 ? 회원 <-> 권한 테이블 양방향으로 설계할 것 같다!! -->
+  <!-- 만약, [회원 -> 게시글] [회원 -> 권한]의 방향이라면 ? 지나치게 Member 중심적인 설계로 치중된다!-->
+  <resultMap type="kr.bit.entity.BoardDTO" id="boardMap">
+    <id property="brdIdx" column="brd_Idx"/> <!-- PK -->
+	<result property="memIdx" column="mem_Idx"/> <!-- FK -->
+	<result property="brdTitle" column="brd_Title"/>
+	<result property="brdContent" column="brd_Content"/>
+	<result property="brdIndate" column="brd_Indate"/>
+	<result property="brdCount" column="brd_Count"/>
+<!-- association(ManyToOne) : Board(다) 'has one' Member(1) -->
+<!-- 게시글 1개의 입장 : 1명의 회원 -->
+	<association property="member" resultMap="memberMap"> </association>
+   </resultMap>
+   
+   <resultMap type="kr.bit.entity.MemberDTO" id="memberMap">
+	<id property="memIdx" column="mem_Idx"/> <!-- PK -->
+	<result property="memID" column="mem_ID"/>
+	<result property="memPassword" column="mem_Password"/>
+	<result property="memName" column="mem_Name"/>
+	<result property="memAge" column="mem_Age"/>
+	<result property="memGender" column="mem_Gender"/>
+	<result property="memEmail" column="mem_Email"/>
+	<result property="memProfile" column="mem_Profile"/>
+<!-- collection(OneToMany) : Member(One) 'has many' Auth(Many)-->
+    <collection property="authList" resultMap="authMap"> </collection>
+    <!-- stackoverflow -->
+    <!-- 트러블 슈팅-->
+	<!-- <collection property="boardList" resultMap="boardMap"> </collection> -->
+	</resultMap>
+	
+	<resultMap type="kr.bit.entity.AuthDTO" id="authMap">
+	 <id property="authIdx" column="auth_Idx"/> <!-- PK -->
+	 <result property="authNum" column="auth_Num"/> 
+     <result property="authType" column="auth_Type"/>
+  	</resultMap>
+  	
+  	
+
+  
+
+
+  
+  
+  
+	
+	
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 회원가입 시, 비밀번호는 암호화되어 db에 저장되므로 #{memPassword}는 사용 못한다. -->
+<!--   <select id="memberLogin" parameterType="kr.bit.entity.Member" resultType="kr.bit.entity.Member">
+    select * from member where memID = #{memID} and memPassword = #{memPassword}
+  </select> -->
+  
+  
+  
+  
+  
+
+  
+  
+
+
+
+
+<!--   <select id="getMemberByIdx" parameterType="Integer" resultMap="memberMap">
+	select * from member M left outer join member_auth A on M.memID = A.memID where M.memIdx = #{memIdx}
+  </select>
+ -->  
+  
+  <!-- join 으로 바꾸기 -->
+<!--   <select id="getMemberByID" parameterType="String" resultType="kr.bit.entity.Member">
+    select * from member where memID = #{memID}
+  </select> -->  
+  
+  
+  <!-- join -->
+<!--   <select id="totalList" resultMap="memberMap">
+ -->    <!-- select의 결과가 Member 타입이 아니다. 가로로 붙여진 두 개의 테이블 연상하기 -->
+<!-- 	select * from member M left outer join myboard B on M.memID = B.memID left outer join member_auth A on M.memID = A.memID
+ -->    <!-- * 아니어도 가능 -> select A.memID, A.auth, B.memName from member_auth A join member B on B.memID = A.memID where A.memID = #{memID} -->
+    <!-- 이건 불가능 : where절이 없으므로, 여러 행 조회됨!
+     select * from member_auth A join member B on B.memID = A.memID -->
+<!--   </select>
+ -->  
+  
+    
+    
+    <!-- memberMap에서, 단방향 매핑(member 1 : board many) 맺어줬으니, association은 x -> stackoverflow 에러발생
+    	 mybatis는 양방향매핑이 안되는건가 ? -->
+<!--     <association property="member" resultMap="memberMap"> </association>-->  
+  
+  
+    
+  
+  
+  
+<!--   <update id="imageUpdate" parameterType="kr.bit.entity.Member" >
+  	update member set memProfile = #{memProfile} where memIdx = #{memIdx}
+  </update>
+ -->  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- join된 테이블의 모든 회원 조회(모든 행 조회) -> list로 반환 -->
+  <select id="memberList" resultMap="memberMap">
+	select * from member M left outer join member_auth A
+  </select>
+  
+  
+  
+  
+<!--   <select id="getAuthList" parameterType="String" resultType="kr.bit.entity.AuthVO">
+    select * from member_auth where memID = #{memID}
+  </select>
+ -->  
+ 
+  
+  
+  
+  
+
+
+</mapper>

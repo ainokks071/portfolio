@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.bit.mapper.BoardMapper">
+
+<!-- 1. 게시물 리스트 조회 -->
+	<select id="boardList" resultMap="boardMap">
+		SELECT * FROM board B LEFT JOIN member M ON B.mem_Idx = M.mem_Idx ORDER BY B.brd_Idx ASC
+	</select>
+
+	<update id="boardCount" parameterType="Integer">
+  		UPDATE board SET brd_Count = brd_Count + 1 WHERE brd_Idx = #{brdIdx}
+    </update>
+    
+	<select id="boardContent" parameterType="Integer" resultMap="boardMap">
+		SELECT * FROM board B INNER JOIN member M ON B.mem_Idx = M.mem_Idx WHERE B.brd_Idx = #{brdIdx}
+	</select>
+	
+	<!-- ajax에서 데이터 보낼 때, 객체 참조(Member member) #{member.memIdx} -->
+	<insert id="boardInsert" parameterType="kr.bit.entity.BoardDTO">
+		INSERT INTO board(mem_Idx, brd_Title, brd_Content)
+		VALUES(#{member.memIdx}, #{brdTitle}, #{brdContent})
+	</insert>
+	
+	<update id="boardUpdate" parameterType="kr.bit.entity.BoardDTO">
+		UPDATE board SET brd_Title=#{brdTitle}, brd_Content=#{brdContent} WHERE brd_Idx=#{brdIdx} 
+  	</update>
+  	
+  	<delete id="boardDelete" parameterType="Integer">
+  		DELETE FROM board WHERE brd_Idx=#{brdIdx} 
+  	</delete>
+  	
+	<!-- 단방향 : [게시판 -> 회원 -> 권한] -->
+	<!-- 만약, [회원 -> 게시판] [회원 -> 권한]의 방향이라면 ? 모든 것을 회원을 중심으로 설계되는 문제 발생 -->
+	<resultMap type="kr.bit.entity.BoardDTO" id="boardMap">
+		<id property="brdIdx" column="brd_Idx"/> <!-- PK -->
+ 		<result property="brdTitle" column="brd_Title"/>
+		<result property="brdContent" column="brd_Content"/>
+		<result property="brdIndate" column="brd_Indate"/>
+		<result property="brdCount" column="brd_Count"/>
+		<!-- association : Board(1) 'has one' Member(다) -->
+		<association property="member" resultMap="memberMap"> </association>
+   </resultMap>
+   
+   <resultMap type="kr.bit.entity.MemberDTO" id="memberMap">
+		<id property="memIdx" column="mem_Idx"/> <!-- PK -->
+		<result property="memID" column="mem_ID"/>
+		<result property="memPassword" column="mem_Password"/>
+		<result property="memName" column="mem_Name"/>
+		<result property="memAge" column="mem_Age"/>
+		<result property="memGender" column="mem_Gender"/>
+		<result property="memEmail" column="mem_Email"/>
+		<result property="memProfile" column="mem_Profile"/>
+		<!-- collection : Member 'has many' Auth-->
+	    <collection property="authList" resultMap="authMap"> </collection>
+<!-- 	<collection property="boardList" resultMap="boardMap"> </collection>-->	
+	</resultMap>
+ 
+	<resultMap type="kr.bit.entity.AuthDTO" id="authMap">
+		 <id property="authIdx" column="auth_Idx"/> <!-- PK -->
+		 <result property="authNum" column="auth_Num"/> 
+	     <result property="authType" column="auth_Type"/>
+  	</resultMap>
+  
+</mapper>
