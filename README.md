@@ -230,39 +230,56 @@
 - (1452): Cannot add or update a child row: a foreign key constraint
   - 회원가입 시 Member테이블과 Authority테이블에 데이터를 넣는 상황에서 발생한 에러입니다.	
   - 자식테이블인 Authority테이블에 먼저 데이터를 넣으려고 했기 때문에 발생하였고, 참조 무결성을 지키지 않았음을 알게 되었습니다.
+  - 즉, 참조하는 테이블에 값이 없는데 참조받는 테이블에 먼저 값을 넣으려고 했기 때문입니다.
   - 아래와 같이 회원 insert 후, 권한 insert로 순서를 변경하여 해결하였습니다.
  
 ```java
 //회원 insert
 memberMapper.memberInsert(member);
+
 //권한 insert
 memberMapper.authInsert(map);
 ```
-
 </div>
 </details>
 
 </br>
 
-<details><summary> ㅇㅇㅇ </summary>
+<details><summary><b>Null값이 있는 데이터를 Insert하려고 했을 때</b></summary>
 <div markdown="1">
-ㅇㅇㅇ
-</div>
-</details>
-
+	
 </br>
 
-<details><summary> ㅇㅇㅇ </summary>
-<div markdown="1">
-ㅇㅇㅇ
-</div>
-</details>
+- Column 'auth_Type' cannot be null
+  - 회원가입 시, 권한을 여러 개 선택하면 반복문으로 Authority테이블에 여러 개의 행이 추가됩니다.
+  - 이 때 선택하지 않은 권한은 auth_Type이 Null인 채로 Insert가 되기 때문에 발생한 에러입니다.
+  - Authority테이블의 auth_Type은 NotNull 제약조건을 갖고 있습니다.
+  - 권한 Insert를 하기 전, Null체크를 하지 않은 것을 발견했고, 아래와 같이 Null체크를 통해 해결하였습니다.
 
-</br>
+```java
+//Null체크
+if(authType != null) {
+	switch(authType) {
+		case "ROLE_USER":
+		authDTO.setAuthNum(1);
+		break;
+							
+		case "ROLE_MANAGER":
+		authDTO.setAuthNum(2);
+		break;
+							
+		case "ROLE_ADMIN":
+		authDTO.setAuthNum(3);
+		break;
+	}
 
-<details><summary> ㅇㅇㅇ </summary>
-<div markdown="1">
-ㅇㅇㅇ
+	map.put("auth", authDTO);
+	map.put("memIdx", newMemberIdx);
+//	권한 insert
+	memberMapper.authInsert(map);
+}
+```
+
 </div>
 </details>
 
@@ -274,26 +291,13 @@ memberMapper.authInsert(map);
 > - MyBatis로 진행한 프로젝트이지만, 최근에 JPA를 학습하면서 ManyToOne, OneToMany의 차이점에 대해 분석했습니다.
 - Member(회원)과 Authority(권한) 엔티티를 OneToMany관계로 설계했을 때와 ManyToOne관계로 설계했을 때, CRUD 작업 시 어떠한 차이점이 있는지 면밀히 따져볼 수 있었습니다.
 - 본 프로젝트는 Board(게시판)과 Member(회원)은 ManyToOne, Member(회원)과 Authority(권한)은 OneToMany로 설계하였습니다.
-
->1. 회원 테이블(부모 테이블), 권한(자식 테이블)(1452): Cannot add or update a child row: a foreign key constraint 참조테이블에 없는 값을 추가해서 발생한 오류
-참조 무결성에 따라서 부모키에 해당하는 값만 넣을 수 있음.
-참조하는 테이블에 데이터를 먼저 추가한 후, 참조받는 테이블에 데이터를 추가하니 오류해결.
-외래키로 연결한 값을 동일하게 줘야함)
-즉, 내가 삽입한 user_id=2라는 유저가 없기때문에 참조하는 user테이블에 없는 값을 추가해서 발생한 오류이다. 
-
-user_id=2인 테이터를 넣고 싶다면 참조하는 테이블인 user에 해당 데이터를 먼저 추가한 뒤, 참조받는 테이블에 데이터를 추가하면 오류가 해결된다. (외래키로 연결한 값을 동일하게 해줘야 한다!!)
-방금 회원가입을 한 회원의 memIdx를 권한 테이블(자식테이블)에 동일한 값으로 초기화해줘야 한다.(참조 무결성)
->2. //			트러블슈팅 : signUpForm에서 권한체크 안한 항목은 null로 들어오기 때문에, 반드시 null체크 해줘야한다!
-//			### SQL: insert into authority(memID, auth)     values(?, ?)
-//			### Cause: java.sql.SQLIntegrityConstraintViolationException:
-AuthDTO(authIdx, authNum, authType, memIdx) : 권한 체크 하지 않으면, authType == null
-Column 'auth_Type' cannot be null
->
+- 
 >3. 	  const memGender = $("input[name=memGender]:radio:checked").length < 1
 	  
 	  const auth1 = $('input:checkbox[id="auth1"]').is(":checked");
 	  const auth2 = $('input:checkbox[id="auth2"]').is(":checked");
 	  const auth3 = $('input:checkbox[id="auth3"]').is(":checked");
+   
 Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string:
 > 4. <!--  회원, 권한 수정 (1452): Cannot add or update a child row: a foreign key constraint fails 
 참조테이블에 없는 값을 추가해서 발생한 오류
