@@ -221,29 +221,49 @@
 
 
 ## 3. 트러블 슈팅
-<details><summary> ㅇㅇㅇ </summary>
+<details><summary> 참조 무결성 위배 </summary>
 <div markdown="1">
-ㅇㅇㅇ
+	
+> Cannot add or update a child row: a foreign key constraint
+>
+> ㅇㅇ
+> 
+> ㅇㅇ
+> 
+> ㅇㅇ
+
+
+> 
+
+
+
 </div>
 </details>
+
 </br>
+
 <details><summary> ㅇㅇㅇ </summary>
 <div markdown="1">
 ㅇㅇㅇ
 </div>
 </details>
+
 </br>
+
 <details><summary> ㅇㅇㅇ </summary>
 <div markdown="1">
 ㅇㅇㅇ
 </div>
 </details>
+
 </br>
+
 <details><summary> ㅇㅇㅇ </summary>
 <div markdown="1">
 ㅇㅇㅇ
 </div>
 </details>
+
 </br>
 
 
