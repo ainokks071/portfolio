@@ -184,11 +184,11 @@
 
 
 #### :pushpin: 코드 확인
-[signUpForm.jsp](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/webapp/WEB-INF/views/member/signUpForm.jsp#L1-L230) &rarr; 
-[MemberController](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/controller/MemberController.java#L46-L59) &rarr; 
-[MemberServiceIml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/service/MemberServiceImpl.java#L57-L130) &rarr; 
-[MemberMapper](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.java#L23-L27) &rarr;
-[MemberMapper.xml](https://github.com/ainokks071/portfolio/blob/0eb28c7e05427bf6f6f0ae3295a3440ff50dcb9c/AuthorityBoard/src/main/java/kr/bit/mapper/MemberMapper.xml#L60-L71)
+[board.jsp](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/webapp/WEB-INF/views/board/board.jsp#L11-L404) &rarr; 
+[BoardController](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/controller/BoardController.java#L22-L65) &rarr; 
+[BoardServiceIml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/service/BoardServiceImpl.java#L11-L47) &rarr; 
+[BoardMapper](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.java#L10-L30) &rarr;
+[BoardMapper.xml](https://github.com/ainokks071/portfolio/blob/0aa7410b96933d5c27d2f3874442399c70e8c914/AuthorityBoard/src/main/java/kr/bit/mapper/BoardMapper.xml#L6-L62)
 
 </br>
 
@@ -196,11 +196,8 @@
 <details><summary><b>상세 보기</b></summary>
 <div markdown="1">
 	
-![image](https://github.com/ainokks071/portfolio/assets/140647727/0ea044fe-c592-41c2-ba13-2f0ccd7f7932)
+	![image](https://github.com/ainokks071/portfolio/assets/140647727/0b1f1ed8-fb8c-4613-9a75-fc965162ce6f)
 
-- 로그인을 한 상태에서 회원 정보 및 권한 정보 수정을 진행합니다.
-- 수정에 성공하면, 수정된 회원객체를 Security Context Holder에 새롭게 객체바인딩을 합니다.
-- 
 </div>
 </details>
 </br>
