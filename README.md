@@ -391,17 +391,3 @@ public void boardInsert(@RequestBody BoardDTO board) {
 ```
 </div>
 </details>
-
-</br>
-
-## 4. 회고 및 향후 계획
-
-> ㅇㅇㅇ
->
-> ㅇㅇㅇ
->
-> ㅇㅇㅇ
->
-> ㅇㅇㅇ
->
-> ㅇㅇㅇ
