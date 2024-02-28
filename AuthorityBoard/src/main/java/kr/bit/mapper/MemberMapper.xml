@@ -17,7 +17,7 @@
 	<!--<insert id="authInsert" parameterType="kr.bit.entity.AuthDTO">
 		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{authNum}, #{authType}, #{memIdx}) 
 	</insert> -->
-	<insert id="authInsert" parameterType="Map">
+	<insert id="authInsert" parameterType="Map">	<!-- FK인 memIdx 따로 isert필요! -->
 		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{auth.authNum}, #{auth.authType}, #{memIdx}) 
 	</insert>
 	
@@ -48,19 +48,13 @@
 	<select id="getMember" parameterType="Integer" resultMap="memberMap">
 		SELECT * FROM member WHERE mem_Idx = #{mem_Idx}
 	</select>
-	
-	
-	
-	
-	
-	
   
   <!-- 회원 + 권한 정보 JOIN  -->
   <!-- 예를 들어, 조회된 결과의 행이 2개이더라도, memberMap의 1대 다 특성상, 결과로 묶이는 객체는 list가 아니다! -->
 	<select id="getMemberByIdx" parameterType="Integer" resultMap="memberMap">
-  		SELECT * FROM member M INNER JOIN authority A ON M.mem_Idx = A.mem_Idx WHERE M.mem_Idx = #{mem_Idx}
+  		SELECT * FROM authority A LEFT JOIN member M ON A.mem_Idx = M.mem_Idx WHERE M.mem_Idx = #{mem_Idx}
  	</select>
-<!--모두 단방향으로만 연결되어 있어도 FK로 조회 가능하다!
+<!--모두 단방향으로만 연결되어 있어도 FK로 조회 가능
 	<select id="getMemberByIdx" parameterType="Integer" resultMap="boardMap">
   	</select> -->  
   
@@ -100,105 +94,4 @@
      <result property="authType" column="auth_Type"/>
   	</resultMap>
   	
-  	
-
-  
-
-
-  
-  
-  
-	
-	
-  
-  
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <!-- 회원가입 시, 비밀번호는 암호화되어 db에 저장되므로 #{memPassword}는 사용 못한다. -->
-<!--   <select id="memberLogin" parameterType="kr.bit.entity.Member" resultType="kr.bit.entity.Member">
-    select * from member where memID = #{memID} and memPassword = #{memPassword}
-  </select> -->
-  
-  
-  
-  
-  
-
-  
-  
-
-
-
-
-<!--   <select id="getMemberByIdx" parameterType="Integer" resultMap="memberMap">
-	select * from member M left outer join member_auth A on M.memID = A.memID where M.memIdx = #{memIdx}
-  </select>
- -->  
-  
-  <!-- join 으로 바꾸기 -->
-<!--   <select id="getMemberByID" parameterType="String" resultType="kr.bit.entity.Member">
-    select * from member where memID = #{memID}
-  </select> -->  
-  
-  
-  <!-- join -->
-<!--   <select id="totalList" resultMap="memberMap">
- -->    <!-- select의 결과가 Member 타입이 아니다. 가로로 붙여진 두 개의 테이블 연상하기 -->
-<!-- 	select * from member M left outer join myboard B on M.memID = B.memID left outer join member_auth A on M.memID = A.memID
- -->    <!-- * 아니어도 가능 -> select A.memID, A.auth, B.memName from member_auth A join member B on B.memID = A.memID where A.memID = #{memID} -->
-    <!-- 이건 불가능 : where절이 없으므로, 여러 행 조회됨!
-     select * from member_auth A join member B on B.memID = A.memID -->
-<!--   </select>
- -->  
-  
-    
-    
-    <!-- memberMap에서, 단방향 매핑(member 1 : board many) 맺어줬으니, association은 x -> stackoverflow 에러발생
-    	 mybatis는 양방향매핑이 안되는건가 ? -->
-<!--     <association property="member" resultMap="memberMap"> </association>-->  
-  
-  
-    
-  
-  
-  
-<!--   <update id="imageUpdate" parameterType="kr.bit.entity.Member" >
-  	update member set memProfile = #{memProfile} where memIdx = #{memIdx}
-  </update>
- -->  
-  
-  
-  
-  
-  
-  
-  
-  
-  <!-- join된 테이블의 모든 회원 조회(모든 행 조회) -> list로 반환 -->
-  <select id="memberList" resultMap="memberMap">
-	select * from member M left outer join member_auth A
-  </select>
-  
-  
-  
-  
-<!--   <select id="getAuthList" parameterType="String" resultType="kr.bit.entity.AuthVO">
-    select * from member_auth where memID = #{memID}
-  </select>
- -->  
- 
-  
-  
-  
-  
-
-
 </mapper>

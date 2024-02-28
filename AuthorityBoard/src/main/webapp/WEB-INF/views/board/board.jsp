@@ -37,6 +37,7 @@
 	}
 	
 	function makeView(boardList) {
+		console.log(boardList);
 		let listHtml="<table class='table table-bordered'>";
 			listHtml+="<thead>";	
 	  	    listHtml+="<tr>";
@@ -55,7 +56,7 @@
   	    	listHtml+="<tr>";
  	  	    listHtml+="<td>"+board.brdIdx+"</td>";			/* 게시물 제목 클릭 시, 게시판 번호 전달하여 상세페이지 open  */
   	    	listHtml+="<td id='boardTitle"+board.brdIdx+"'><a href='javascript:boardCountAndContent(" + board.brdIdx + ")'>" + board.brdTitle + "</a></td>";
-  	    										/* board.member.memIdx(FK)를 전달 : [회원 + 게시판] 테이블 JOIN */
+  	    										/* board.member.memIdx(FK)를 전달 -> 회원 + 권한 join에 필요 */
   	    										/* 문제점 : 자바스크립트 함수 호출 시, 문자열로 값 넘기는 것은 좋지 않다. -> 숫자로 전달하자. */
   	        listHtml+="<td> <a href='javascript:getMember(" + board.member.memIdx + ")'>" + board.member.memName + "</a> </td>";
   	        	/* indate = 2023-12-18 12:34:33 문자열 -> 자바스크립트 문자열 자르기 */
@@ -149,8 +150,6 @@
 	          	str += member.memID;
 	          	str += "</br></br> <b>회원 성별</b> : ";
 	          	str += member.memGender;
-	          	str += "</br> <b>회원 나이</b> : ";
-	          	str += member.memAge;
 	          	str += "</br> <b>회원 이메일</b> : ";
 	          	str += member.memEmail;
 	          	
@@ -158,7 +157,16 @@
 		    	if(${!empty user}) {
 		          	str += "</br></br> <b>회원 사진</b> </br>";
 		          	str += "</span>";
-		          	picture += "<img src='${contextPath}/resources/upload/"+member.memProfile+"' style='width: 300px; height: 300px;'/>";
+		          	/* 사진 없는 경우  */
+		          	if(member.memProfile == "") {
+			          	picture += "<img src='${contextPath}/resources/images/basicProfile.jpeg' style='width: 300px; height: 300px;'/>";
+		          	} else {
+			          	picture += "<img src='${contextPath}/resources/upload/"+member.memProfile+"' style='width: 300px; height: 300px;'/>";
+		          	}
+		    	} else {
+		          	str += "</br></br> <b>회원 사진</b> </br>";
+		          	str += "</span>";
+		          	picture += "<img src='${contextPath}/resources/images/basicProfile.jpeg' style='width: 300px; height: 300px;'/>";
 		    	}          	
 	          	
 			    $("#modalTitle").text("회원 정보");

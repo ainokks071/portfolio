@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.bit.mapper.BoardMapper">
+<!-- SQL Mapper : SQL과 매핑 -->
 
-<!-- 1. 게시물 리스트 조회 -->
+<!-- 게시물 리스트 조회 -->
 	<select id="boardList" resultMap="boardMap">
 		SELECT * FROM board B LEFT JOIN member M ON B.mem_Idx = M.mem_Idx ORDER BY B.brd_Idx ASC
 	</select>

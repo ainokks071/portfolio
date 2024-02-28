@@ -30,7 +30,7 @@ public interface MemberMapper {
 	public void imageUpdate(MemberDTO member);
 	public MemberDTO getMember(int memIdx);
 	
-//	5. 게시판 작성자 클릭 시, 회원 조회(join) : 특정 회원 정보 + 권한 정보 추출 (게시판 리스트에 이미 회원 정보와 게시물 정보가 있으므로, 회원과 권한만 가져오자.)
+//	5. 게시판 작성자 클릭 시, 회원 조회(join) : 특정 회원 정보 + 권한 정보 추출
 	public MemberDTO getMemberByIdx(int memIdx);
 	
 }

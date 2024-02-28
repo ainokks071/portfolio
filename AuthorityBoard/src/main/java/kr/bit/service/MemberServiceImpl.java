@@ -32,9 +32,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	UserDetailsServiceImpl userDetailsServiceImpl;
-	
 
-//	1.회원가입 
+//	* 회원가입 
 //	아이디 중복확인
 	@Override
 	public String idDuplicated(String memID) {
@@ -92,7 +91,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(success != 0) {
 			
-//			OneToMany : Authority 테이블에 mem_Idx insert 시, 번거롭다.
+//			OneToMany : Authority 테이블에 mem_Idx insert 시, 번거롭다 -> Member테이블에서 PK인 memIdx 추출하여 Authority테이블에 직접 isesrt
 			int newMemberIdx = memberMapper.getMemberIdx(member.getMemID());
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -136,9 +135,9 @@ public class MemberServiceImpl implements MemberService{
 		}
 	}
 
-//	2. 로그인 : 시큐리티가 처리
+//	* 로그인 : 시큐리티가 처리
 	
-//	3. 회원 정보, 권한 정보 수정
+//	* 회원 정보, 권한 정보 수정
 	@Override
 	public String memberUpdate(MemberDTO member, String memPassword1, String memPassword2, RedirectAttributes rattr) {
 		List<AuthDTO> authList = member.getAuthList();
