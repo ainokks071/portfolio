@@ -41,7 +41,6 @@ public class MemberUser extends User{
 //		나머지 정보 : email, name, profile, gender 등 모두 초기화 
 		this.member = member;
 		
-		
 //		따라서, MemberUser객체는 부모인 User(memID, memPass, memAuth)와 자신의 필드인 member(모든 정보O) 사용 가능 !! 
 	}
 

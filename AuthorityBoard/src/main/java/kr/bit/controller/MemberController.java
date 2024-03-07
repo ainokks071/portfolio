@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.bit.entity.MemberDTO;
 import kr.bit.service.MemberService;
 
-@RequestMapping("/member")
 @Controller
+@RequestMapping("/member")
 public class MemberController{	
 	
 	@Autowired
@@ -30,14 +30,17 @@ public class MemberController{
 		String id = memberService.idDuplicated(memID);
 		return id;
 	}
+	
 //	회원가입 처리
 	@PostMapping("/signUp")
 	public String signUp(MemberDTO member, String memPassword1, String memPassword2, RedirectAttributes rattr) {
 		String url = memberService.signUp(member, memPassword1, memPassword2, rattr);
 		switch(url) {
+//			회원가입 실패
 			case "redirect:/member/signUpForm":
 				return "redirect:/member/signUpForm";
 				
+//			회원가입 성공
 			case "redirect:/main":
 				return "redirect:/main";
 				
@@ -55,9 +58,10 @@ public class MemberController{
 		String url = memberService.memberUpdate(member, memPassword1, memPassword2, rattr);
 		
 		switch(url) {
-
+//		업데이트 실패 시
 		case "redirect:/updateForm":
 			return "redirect:/updateForm";
+//		업데이트 성공 시
 		case "redirect:/main":
 			return "redirect:/main";
 		default:

@@ -93,7 +93,7 @@
 
 <body>
 <div class="container">
-  <h2>SpringMVC06</h2>
+  <h2>회원 정보 수정</h2>
   <div class="panel panel-default">
     <div class="panel-heading">회원수정화면</div>
     <div class="panel-body" id="writeForm" >
@@ -183,8 +183,6 @@
          
       </form>    
     </div>
-    
-    
     
 <jsp:include page="../common/modal.jsp"/>
 <!-- <h4 id="modalTitle">모달 창 제목 뿌려주기</h4>

@@ -91,7 +91,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(success != 0) {
 			
-//			OneToMany : Authority 테이블에 mem_Idx insert 시, 번거롭다 -> Member테이블에서 PK인 memIdx 추출하여 Authority테이블에 직접 isesrt
+//			OneToMany : Authority 테이블에 mem_Idx insert 시, 번거롭다 -> Member테이블에서 PK인 memIdx 추출하여 Authority테이블에 직접 insert
 			int newMemberIdx = memberMapper.getMemberIdx(member.getMemID());
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();

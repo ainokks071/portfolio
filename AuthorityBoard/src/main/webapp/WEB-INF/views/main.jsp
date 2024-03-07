@@ -17,6 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
    <script type="text/javascript">
+   
 	$(document).ready(function() {
 		/* 회원가입 성공 메세지 */
 		if(${msg1 != null}) {
@@ -61,7 +62,9 @@
 
  <div class="container">
   <h3>회원 전용 게시판</h3>
+  <!-- 로그인 O -->
   <h4 style="color:blue;"> <c:if test="${user.member.memName != null}"> ${user.member.memName}님 환영합니다.</c:if></h4>
+  <!-- 로그인 X -->
   <h4 style="color:red;"> <c:if test="${user.member.memName == null}"> 로그인 해주세요 !</c:if></h4>
   <p>게시판 + 회원관리 : 권한 -> 회원가입, 로그인 기능 구현</p>
 </div>

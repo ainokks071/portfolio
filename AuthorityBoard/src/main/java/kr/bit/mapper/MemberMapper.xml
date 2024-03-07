@@ -17,7 +17,7 @@
 	<!--<insert id="authInsert" parameterType="kr.bit.entity.AuthDTO">
 		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{authNum}, #{authType}, #{memIdx}) 
 	</insert> -->
-	<insert id="authInsert" parameterType="Map">	<!-- FK인 memIdx 따로 isert필요! -->
+	<insert id="authInsert" parameterType="Map">	<!-- FK인 memIdx 따로 insert필요! -->
 		INSERT INTO authority(auth_Num, auth_Type, mem_Idx) VALUES(#{auth.authNum}, #{auth.authType}, #{memIdx}) 
 	</insert>
 	

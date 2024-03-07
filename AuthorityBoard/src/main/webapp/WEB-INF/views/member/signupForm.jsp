@@ -33,7 +33,7 @@
     		alert("아이디를 입력하세요");
     		return;
     	}
-    	
+    	/* ajax 비동기 통신 */
 		$.ajax({
 			url : "${contextPath}/member/idDuplicated",
 			type : "get",
@@ -112,7 +112,7 @@
 	  
 	  /* 여기까지 입력 누락, 비밀번호 일치여부 통과  */
 	  
-	  /* 3. 아이디 중복 체크 */
+	  /* 3. 아이디 중복 체크 + 서버로 데이터 전송 */
 		$.ajax({
 			url : "${contextPath}/member/idDuplicated",
 			type : "get",
@@ -159,7 +159,7 @@
            
            <tr>
              <td style="width: 110px; vertical-align: middle;">비밀번호</td>
-             																			  <!--input에 입력할 때마다 함수 호출  -->
+             																			  <!--input에 입력하고 뗄 때마다 함수 호출  -->
              <td colspan="2"><input type="password" id="memPassword1" name="memPassword1" onkeyup="passwordCheck()" class="form-control" maxlength="20" placeholder="비밀번호를 입력하세요."/></td>            
            </tr>
            <tr>
